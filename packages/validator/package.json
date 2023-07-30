@@ -1,0 +1,8 @@
+{
+  "name": "@xish/validator",
+  "version": "0.0.1",
+  "type": "commonjs",
+  "scripts": {
+    "test": "ts-node src/lib/validator.ts"
+  }
+}
