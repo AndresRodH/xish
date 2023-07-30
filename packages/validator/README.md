@@ -1,6 +1,8 @@
 # validator
 
-This library was generated with [Nx](https://nx.dev).
+> 🚧 WIP
+
+Validator library using the decorator proposal introduced in [TypeScript 5.0](https://devblogs.microsoft.com/typescript/announcing-typescript-5-0/#decorators) and the decorator metadata proposal introduced in [TypeScript 5.2](https://devblogs.microsoft.com/typescript/announcing-typescript-5-2-beta/#decorator-metadata)
 
 ## Building
 
