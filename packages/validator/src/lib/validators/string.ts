@@ -1,8 +1,14 @@
 import { Validator, setValidatorMetadata } from "../validator"
 
 export interface StringValidatorOptions {
-  min?: number
-  max?: number
+  /**
+  * Maximum length of the string
+  */
+  minLength?: number
+  /**
+  * Minimum length of the string
+  */
+  maxLength?: number
 }
 
 export class IsStringValidator implements Validator {
@@ -20,15 +26,15 @@ export class IsStringValidator implements Validator {
     }
 
     const errors: string[] = []
-    if (this.options.max && this.options.min && this.options.max < this.options.min) {
-      throw new Error(`Validator configuration validation failed: max (${this.options.max}) cannot be less than min (${this.options.min})`)
+    if (this.options.maxLength && this.options.minLength && this.options.maxLength < this.options.minLength) {
+      throw new Error(`Validator configuration validation failed: max length (${this.options.maxLength}) cannot be less than min lenght (${this.options.minLength})`)
     }
 
-    if (this.options.max && field.length > this.options.max) {
-      errors.push(`is longer than ${this.options.max}`)
+    if (this.options.maxLength && field.length > this.options.maxLength) {
+      errors.push(`is longer than ${this.options.maxLength}`)
     }
-    if (this.options.min && field.length < this.options.min) {
-      errors.push(`is longer than ${this.options.max}`)
+    if (this.options.minLength && field.length < this.options.minLength) {
+      errors.push(`is longer than ${this.options.maxLength}`)
     }
 
     return errors.length > 0 ? { success: false as const, errors } : { success: true as const }
