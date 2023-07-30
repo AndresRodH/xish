@@ -44,4 +44,28 @@ describe('isString', () => {
     expect(() => parse(new MaxTest('123456'))).not.toThrow()
     expect(() => parse(new MaxTest('long string'))).toThrow()
   })
+
+  test('min/max rules can be combined', () => {
+    class MinMaxTest {
+      @isString({ min: 3, max: 6 })
+      field: string
+
+      constructor(value: string) {
+        this.field = value
+      }
+    }
+
+    expect(() => parse(new MinMaxTest('passes'))).not.toThrow()
+    expect(() => parse(new MinMaxTest('ah'))).toThrow()
+    expect(() => parse(new MinMaxTest('too long'))).toThrow()
+  })
+
+  test('max cannot be less than min', () => {
+    class MinMaxValidationTest {
+      @isString({ min: 6, max: 3 })
+      thisFails = ''
+    }
+
+    expect(() => parse(new MinMaxValidationTest())).toThrow('Validator configuration validation failed: max (3) cannot be less than min (6)')
+  })
 })

@@ -17,6 +17,9 @@ interface Schema {
 
 const storage = new WeakMap<object, Schema>
 
+/**
+  * Initializes a schema or appends validation metadata to the existing one
+  */
 function setValidatorMetadata(context: ClassFieldDecoratorContext, validator: Validator) {
   if (typeof context.name !== "string") {
     throw new Error("Can only validate string properties.");
@@ -83,6 +86,10 @@ class IsStringValidator implements Validator {
     }
 
     const errors: string[] = []
+    if (this.options.max && this.options.min && this.options.max < this.options.min) {
+      throw new Error(`Validator configuration validation failed: max (${this.options.max}) cannot be less than min (${this.options.min})`)
+    }
+
     if (this.options.max && field.length > this.options.max) {
       errors.push(`is longer than ${this.options.max}`)
     }
