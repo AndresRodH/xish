@@ -1,4 +1,5 @@
-import { isString, parse } from "./validator"
+import { isString } from './string'
+import { parse } from '../validator'
 
 describe('isString', () => {
   test('passes if string', () => {
